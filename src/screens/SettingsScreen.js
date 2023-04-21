@@ -7,14 +7,30 @@ import auth from '@react-native-firebase/auth'
 export default function SettingsScreen({ navigation }) {
 
   function handleSignout() {
-    auth()
-      .signOut()
-      .then(() => {
-        navigation.replace("Login Screen");
-      })
-      .catch(e => {
-        Alert.alert(e.nativeErrorCode?? e.code, e.nativeErrorMessage?? e.message);
-      });
+    Alert.alert(
+      "Are you sure you want to sign out?",
+      "",
+      [
+        {
+          text: "Yes",
+          style: "destructive",
+          onPress() {
+            auth()
+              .signOut()
+              .then(() => {
+                navigation.replace("Login Screen");
+              })
+              .catch(e => {
+                Alert.alert(e.nativeErrorCode?? e.code, e.nativeErrorMessage?? e.message);
+              });
+          }
+        },
+        {
+          text: "No",
+          style: "cancel"
+        }
+      ]
+    )
   }
 
   return (

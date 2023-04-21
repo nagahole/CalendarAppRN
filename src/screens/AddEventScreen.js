@@ -65,30 +65,56 @@ export default function AddEventScreen({ route, navigation }) {
 
     setButtonsDisabled(true);
 
-    let id = uuidv4();
+    if (data.id != null) {
+      firestore()
+        .collection("users")
+        .doc(auth().currentUser.uid)
+        .collection("events")
+        .doc(data.id)
+        .set({
+          id: data.id,
+          title,
+          description,
+          date: date.getTime(),
+          allDay
+        })
+        .then(() => {
+          setButtonsDisabled(false);
+          setTitle("");
+          setDescription("");
+          navigation.goBack();
+        })
+        .catch(e => {
+          setButtonsDisabled(false);
+          Alert.alert(e.nativeErrorCode?? e.code, e.nativeErrorMessage?? e.message);
+        });
+    } else {
 
-    firestore()
-      .collection("users")
-      .doc(auth().currentUser.uid)
-      .collection("events")
-      .doc(id)
-      .set({
-        id,
-        title,
-        description,
-        date: date.getTime(),
-        allDay
-      })
-      .then(() => {
-        setButtonsDisabled(false);
-        setTitle("");
-        setDescription("");
-        navigation.goBack();
-      })
-      .catch(e => {
-        setButtonsDisabled(false);
-        Alert.alert(e.nativeErrorCode?? e.code, e.nativeErrorMessage?? e.message);
-      });
+      let id = uuidv4();
+
+      firestore()
+        .collection("users")
+        .doc(auth().currentUser.uid)
+        .collection("events")
+        .doc(id)
+        .set({
+          id,
+          title,
+          description,
+          date: date.getTime(),
+          allDay
+        })
+        .then(() => {
+          setButtonsDisabled(false);
+          setTitle("");
+          setDescription("");
+          navigation.goBack();
+        })
+        .catch(e => {
+          setButtonsDisabled(false);
+          Alert.alert(e.nativeErrorCode?? e.code, e.nativeErrorMessage?? e.message);
+        });
+    }
   }
 
   return (
