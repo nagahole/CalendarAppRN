@@ -9,5 +9,4 @@
 <img src="https://github.com/user-attachments/assets/6f7c6d58-1da8-4b59-9ab5-a85811b5e77b" height="500">
 <img src="https://github.com/user-attachments/assets/2f5a79f8-7d50-4b35-bd0d-98d8d07b7e32" height="500">
 
-[App demo](https://www.youtube.com/watch?v=NZWlz5a_FrI)
-
+[![App Demo](https://img.youtube.com/vi/NZWlz5a_FrI/0.jpg)](https://www.youtube.com/watch?v=NZWlz5a_FrI)
